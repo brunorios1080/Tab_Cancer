@@ -1,0 +1,34 @@
+In order to download TabPFN weights, go to platform.priorlabs.ai and create an account
+
+We need a token to use TabPFN
+1. Go to ux.priorlabs.ai and sign up / log in
+2. Accept the license at ux.priorlabs.ai/account/licenses
+3. Create an API Key at ux.priorlabs.ai/account/api-keys
+4. Copy your Access Token from ux.priorlabs.ai/account
+
+
+An ROC-AUC score (Area Under the Receiver Operating Characteristic Curve) is a single number that measures how well a classification model distinguishes between positive and negative classes across all possible decision thresholds
+
+TabPFNClassifier() and TabPFNRegressor() both use version 3.5 as default. To specify the version, we use the following lines:
+from tabpfn.constants import ModelVersion
+
+classifier = TabPFNClassifier.create_default_for_version(ModelVersion.V3_5_FAST)
+regressor = TabPFNRegressor.create_default_for_version(ModelVersion.V3_5_FAST)
+
+Change V3_5_FAST to the desiserd version
+
+The TabPFNClassifier.fit(x_train, y_train) method does not train neural network weights or perform gradient descent. Instead, it supplies context data to the pre-trained transformer model for in-context learning
+
+Cross-validation (CV) is a resampling technique used to evaluate how well a machine learning model generalizes to unseen data while preventing overfitting. Instead of relying on a single train-test split—which can lead to a "lucky" or "unlucky" evaluation based on how data is divided—cross-validation systematically partitions data into multiple subsets to yield a stable and trustworthy performance metric.
+-in other words, K-Fold validation
+
+By default, the standard TabPFNClassifier uses 0 training epochs when you call. You pass your data, and in a single run, it gives you the results.
+
+Methods
+-.predict(X_test): gives the predicted value for each row
+-.predict_proba(X_test): gives the probability of each row being in each class
+-.score(X_test, y_test): How many from the predicted labels were actually right? This gives the percentage
+-.fit(X_train, y_train): runs the algorithm that guesses the label
+
+How to fine tune
+https://docs.priorlabs.ai/capabilities/fine-tuning
